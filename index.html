@@ -4,13 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Love Message ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;600;700&family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;600;700&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             min-height: 100vh;
@@ -20,6 +16,7 @@
             overflow-x: hidden;
             font-family: 'Hind Siliguri', 'Poppins', sans-serif;
             position: relative;
+            color: white;
         }
 
         @keyframes gradientBG {
@@ -30,187 +27,127 @@
 
         /* Floating Hearts Background */
         .hearts-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 1;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; overflow: hidden; z-index: 1;
         }
-
         .heart {
-            position: absolute;
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 20px;
-            animation: floatUp linear infinite;
-            bottom: -50px;
+            position: absolute; color: rgba(255,255,255,0.25); font-size: 20px;
+            animation: floatUp linear infinite; bottom: -50px;
         }
-
         @keyframes floatUp {
-            0% {
-                transform: translateY(0) rotate(0deg) scale(1);
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(360deg) scale(0.5);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.8; }
+            100% { transform: translateY(-100vh) rotate(360deg) scale(0.5); opacity: 0; }
         }
-
-        /* Sparkle particles */
         .sparkle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: white;
-            border-radius: 50%;
-            animation: sparkle 3s ease-in-out infinite;
+            position: absolute; width: 4px; height: 4px; background: white;
+            border-radius: 50%; animation: sparkle 3s ease-in-out infinite;
         }
-
         @keyframes sparkle {
             0%, 100% { opacity: 0; transform: scale(0); }
             50% { opacity: 1; transform: scale(1); }
         }
 
-        /* Main Container */
-        .main-container {
-            position: relative;
-            z-index: 10;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+        /* Navigation */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 200;
+            background: rgba(0,0,0,0.25); backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.1); padding: 0 20px;
+        }
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto; display: flex;
+            align-items: center; justify-content: space-between; height: 60px;
+        }
+        .nav-logo {
+            font-family: 'Great Vibes', cursive; font-size: 1.8rem;
+            color: #fff; text-shadow: 0 0 15px rgba(255,105,180,0.8);
+        }
+        .nav-links {
+            display: flex; gap: 8px;
+        }
+        .nav-link {
+            padding: 8px 18px; border: none; background: transparent;
+            color: rgba(255,255,255,0.7); font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem; cursor: pointer; border-radius: 20px;
+            transition: all 0.3s ease; text-decoration: none;
+        }
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255,255,255,0.15); color: white;
+        }
+        .nav-link.active {
+            background: rgba(255,105,180,0.4); font-weight: 600;
         }
 
         /* Language Toggle */
         .lang-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 5px;
-            display: flex;
-            gap: 5px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: fixed; top: 75px; right: 20px; z-index: 100;
+            background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
+            border-radius: 30px; padding: 5px; display: flex; gap: 5px;
+            border: 1px solid rgba(255,255,255,0.2);
         }
-
         .lang-btn {
-            padding: 8px 20px;
-            border: none;
-            background: transparent;
-            color: white;
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            cursor: pointer;
-            border-radius: 25px;
-            transition: all 0.3s ease;
+            padding: 6px 16px; border: none; background: transparent;
+            color: white; font-family: 'Poppins', sans-serif; font-size: 13px;
+            cursor: pointer; border-radius: 25px; transition: all 0.3s ease;
         }
+        .lang-btn.active { background: rgba(255,255,255,0.3); font-weight: 600; }
+        .lang-btn:hover { background: rgba(255,255,255,0.2); }
 
-        .lang-btn.active {
-            background: rgba(255, 255, 255, 0.3);
-            font-weight: 600;
+        /* Page Sections */
+        .page-section {
+            display: none; min-height: 100vh; padding-top: 80px;
+            position: relative; z-index: 10;
         }
+        .page-section.active { display: block; }
 
-        .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
+        /* ===== HOME PAGE ===== */
+        .home-container {
+            min-height: calc(100vh - 80px); display: flex;
+            flex-direction: column; align-items: center; justify-content: center;
+            padding: 20px;
         }
-
-        /* Title */
         .love-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 4rem;
-            color: #fff;
-            text-shadow: 0 0 20px rgba(255, 105, 180, 0.8), 0 0 40px rgba(255, 105, 180, 0.5);
-            margin-bottom: 10px;
-            animation: glow 2s ease-in-out infinite alternate;
+            font-family: 'Great Vibes', cursive; font-size: 4rem; color: #fff;
+            text-shadow: 0 0 20px rgba(255,105,180,0.8), 0 0 40px rgba(255,105,180,0.5);
+            margin-bottom: 10px; animation: glow 2s ease-in-out infinite alternate;
         }
-
         @keyframes glow {
-            from { text-shadow: 0 0 20px rgba(255, 105, 180, 0.8), 0 0 40px rgba(255, 105, 180, 0.5); }
-            to { text-shadow: 0 0 30px rgba(255, 105, 180, 1), 0 0 60px rgba(255, 105, 180, 0.8), 0 0 80px rgba(255, 20, 147, 0.6); }
+            from { text-shadow: 0 0 20px rgba(255,105,180,0.8), 0 0 40px rgba(255,105,180,0.5); }
+            to { text-shadow: 0 0 30px rgba(255,105,180,1), 0 0 60px rgba(255,105,180,0.8), 0 0 80px rgba(255,20,147,0.6); }
         }
+        .subtitle { color: rgba(255,255,255,0.8); font-size: 1.1rem; margin-bottom: 40px; font-weight: 300; }
 
-        .subtitle {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-            font-weight: 300;
-        }
-
-        /* Message Card */
         .message-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 25px;
-            padding: 40px;
-            max-width: 700px;
-            width: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            position: relative;
-            overflow: hidden;
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(20px);
+            border-radius: 25px; padding: 40px; max-width: 700px; width: 100%;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+            position: relative; overflow: hidden;
         }
-
         .message-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            content: ''; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
             animation: rotate 20s linear infinite;
         }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Multi-color Animated Text */
-        .animated-text {
-            font-size: 1.4rem;
-            line-height: 2.2;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
+        .animated-text { font-size: 1.4rem; line-height: 2.2; text-align: center; position: relative; z-index: 2; }
         .animated-text .word {
-            display: inline-block;
-            animation: colorWave 3s ease-in-out infinite;
-            font-weight: 600;
+            display: inline-block; animation: colorWave 3s ease-in-out infinite; font-weight: 600;
         }
-
         @keyframes colorWave {
-            0%, 100% { color: #ff6b9d; text-shadow: 0 0 10px rgba(255, 107, 157, 0.5); }
-            20% { color: #c44569; text-shadow: 0 0 10px rgba(196, 69, 105, 0.5); }
-            40% { color: #f8b500; text-shadow: 0 0 10px rgba(248, 181, 0, 0.5); }
-            60% { color: #ff6b9d; text-shadow: 0 0 10px rgba(255, 107, 157, 0.5); }
-            80% { color: #e056fd; text-shadow: 0 0 10px rgba(224, 86, 253, 0.5); }
+            0%, 100% { color: #ff6b9d; text-shadow: 0 0 10px rgba(255,107,157,0.5); }
+            20% { color: #c44569; text-shadow: 0 0 10px rgba(196,69,105,0.5); }
+            40% { color: #f8b500; text-shadow: 0 0 10px rgba(248,181,0,0.5); }
+            60% { color: #ff6b9d; text-shadow: 0 0 10px rgba(255,107,157,0.5); }
+            80% { color: #e056fd; text-shadow: 0 0 10px rgba(224,86,253,0.5); }
         }
-
         .animated-text .word:nth-child(2n) { animation-delay: 0.1s; }
         .animated-text .word:nth-child(3n) { animation-delay: 0.2s; }
         .animated-text .word:nth-child(4n) { animation-delay: 0.3s; }
         .animated-text .word:nth-child(5n) { animation-delay: 0.4s; }
 
-        /* Pulsing Heart */
-        .heart-icon {
-            font-size: 3rem;
-            display: block;
-            text-align: center;
-            margin: 20px 0;
-            animation: heartbeat 1.5s ease-in-out infinite;
-        }
-
+        .heart-icon { font-size: 3rem; display: block; text-align: center; margin: 20px 0; animation: heartbeat 1.5s ease-in-out infinite; }
         @keyframes heartbeat {
             0%, 100% { transform: scale(1); }
             10% { transform: scale(1.1); }
@@ -219,216 +156,301 @@
             40% { transform: scale(1); }
         }
 
-        /* Clickable Love Emoji Button */
         .clickable-love {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3.5rem;
-            cursor: pointer;
-            margin: 15px auto;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 3.5rem; cursor: pointer; margin: 15px auto;
             animation: heartbeat 1.2s ease-in-out infinite, loveGlow 2s ease-in-out infinite alternate;
-            filter: drop-shadow(0 0 15px rgba(255, 20, 147, 0.6));
-            transition: transform 0.2s ease;
-            user-select: none;
-            position: relative;
-            z-index: 10;
+            filter: drop-shadow(0 0 15px rgba(255,20,147,0.6));
+            transition: transform 0.2s ease; user-select: none; position: relative; z-index: 10;
         }
-
-        .clickable-love:hover {
-            transform: scale(1.2);
-            filter: drop-shadow(0 0 25px rgba(255, 20, 147, 0.9));
-        }
-
-        .clickable-love:active {
-            transform: scale(0.95);
-        }
-
+        .clickable-love:hover { transform: scale(1.2); filter: drop-shadow(0 0 25px rgba(255,20,147,0.9)); }
+        .clickable-love:active { transform: scale(0.95); }
         @keyframes loveGlow {
-            from { filter: drop-shadow(0 0 10px rgba(255, 20, 147, 0.5)); }
-            to { filter: drop-shadow(0 0 30px rgba(255, 20, 147, 1)); }
+            from { filter: drop-shadow(0 0 10px rgba(255,20,147,0.5)); }
+            to { filter: drop-shadow(0 0 30px rgba(255,20,147,1)); }
         }
+        .click-hint { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 5px; animation: fadeInOut 2s ease-in-out infinite; }
+        @keyframes fadeInOut { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
-        .click-hint {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.6);
-            margin-top: 5px;
-            animation: fadeInOut 2s ease-in-out infinite;
-        }
+        .signature { text-align: center; margin-top: 30px; color: rgba(255,255,255,0.7); font-family: 'Great Vibes', cursive; font-size: 1.8rem; }
 
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
-        }
-
-        /* Popup Modal */
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(8px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .popup-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .popup-box {
-            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 50%, #f8b500 100%);
-            border-radius: 30px;
-            padding: 50px 40px;
-            max-width: 450px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 50px rgba(255, 107, 157, 0.4);
-            transform: scale(0.5) translateY(50px);
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            position: relative;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .popup-overlay.active .popup-box {
-            transform: scale(1) translateY(0);
-        }
-
-        .popup-emoji {
-            font-size: 4rem;
-            margin-bottom: 15px;
-            animation: bounce 1s ease infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        .popup-text {
-            font-family: 'Great Vibes', cursive;
-            font-size: 2.5rem;
-            color: white;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-            line-height: 1.4;
-            margin-bottom: 25px;
-        }
-
-        .popup-hearts {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            animation: heartbeat 1s ease-in-out infinite;
-        }
-
-        .popup-close {
-            background: rgba(255, 255, 255, 0.25);
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            color: white;
-            padding: 12px 35px;
-            border-radius: 30px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .popup-close:hover {
-            background: rgba(255, 255, 255, 0.4);
-            transform: scale(1.05);
-        }
-
-        .popup-close:active {
-            transform: scale(0.95);
-        }
-
-        /* Confetti for popup */
-        .confetti-piece {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: #ffd700;
-            top: -10px;
-            opacity: 0;
-        }
-
-        .popup-overlay.active .confetti-piece {
-            animation: confettiFall 3s ease-out forwards;
-        }
-
-        @keyframes confettiFall {
-            0% { opacity: 1; transform: translateY(0) rotate(0deg); }
-            100% { opacity: 0; transform: translateY(300px) rotate(720deg); }
-        }
-
-        /* Signature */
-        .signature {
-            text-align: center;
-            margin-top: 30px;
-            color: rgba(255, 255, 255, 0.7);
-            font-family: 'Great Vibes', cursive;
-            font-size: 1.8rem;
-        }
-
-        /* Floating emojis */
-        .floating-emoji {
-            position: fixed;
-            font-size: 24px;
-            pointer-events: none;
-            z-index: 5;
-            animation: floatEmoji 10s ease-in-out infinite;
-        }
-
-        @keyframes floatEmoji {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(20px, -30px) rotate(10deg); }
-            50% { transform: translate(-10px, -50px) rotate(-5deg); }
-            75% { transform: translate(15px, -20px) rotate(5deg); }
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            .love-title { font-size: 2.5rem; }
-            .message-card { padding: 25px; }
-            .animated-text { font-size: 1.1rem; line-height: 2; }
-            .popup-text { font-size: 2rem; }
-            .popup-box { padding: 35px 25px; }
-            .clickable-love { font-size: 3rem; }
-        }
-
-        /* Hidden class for language toggle */
-        .hidden { display: none !important; }
-
-        /* Decorative corner hearts */
-        .corner-heart {
-            position: absolute;
-            font-size: 30px;
-            opacity: 0.6;
-            animation: cornerPulse 2s ease-in-out infinite;
-        }
-
+        .corner-heart { position: absolute; font-size: 30px; opacity: 0.6; animation: cornerPulse 2s ease-in-out infinite; }
         .corner-heart.tl { top: 15px; left: 15px; }
         .corner-heart.tr { top: 15px; right: 15px; animation-delay: 0.5s; }
         .corner-heart.bl { bottom: 15px; left: 15px; animation-delay: 1s; }
         .corner-heart.br { bottom: 15px; right: 15px; animation-delay: 1.5s; }
+        @keyframes cornerPulse { 0%, 100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.2); opacity: 1; } }
 
-        @keyframes cornerPulse {
-            0%, 100% { transform: scale(1); opacity: 0.6; }
-            50% { transform: scale(1.2); opacity: 1; }
+        /* ===== MESSAGES PAGE ===== */
+        .page-header {
+            text-align: center; padding: 40px 20px 20px;
         }
+        .page-header h2 {
+            font-family: 'Great Vibes', cursive; font-size: 3rem;
+            text-shadow: 0 0 20px rgba(255,105,180,0.6); margin-bottom: 10px;
+        }
+        .page-header p { color: rgba(255,255,255,0.7); font-size: 1rem; }
+
+        .messages-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px; max-width: 1200px; margin: 0 auto; padding: 20px;
+        }
+        .msg-card {
+            background: rgba(255,255,255,0.08); backdrop-filter: blur(15px);
+            border-radius: 20px; padding: 30px; border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: all 0.4s ease; cursor: pointer; position: relative; overflow: hidden;
+        }
+        .msg-card::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        .msg-card:hover::after { left: 100%; }
+        .msg-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3), 0 0 30px rgba(255,105,180,0.2);
+            border-color: rgba(255,105,180,0.4);
+        }
+        .msg-card .msg-emoji { font-size: 2.5rem; margin-bottom: 15px; display: block; }
+        .msg-card .msg-text {
+            font-size: 1.05rem; line-height: 1.8; color: rgba(255,255,255,0.9);
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        .msg-card .msg-tag {
+            display: inline-block; margin-top: 15px; padding: 5px 14px;
+            background: rgba(255,105,180,0.25); border-radius: 15px;
+            font-size: 0.75rem; color: #ffb3d1; border: 1px solid rgba(255,105,180,0.3);
+        }
+
+        /* ===== GALLERY PAGE ===== */
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px; max-width: 1200px; margin: 0 auto; padding: 20px 20px 60px;
+        }
+        .gallery-item {
+            border-radius: 20px; overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            transition: all 0.4s ease; cursor: pointer;
+            position: relative; border: 2px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+        }
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4), 0 0 40px rgba(255,105,180,0.3);
+            border-color: rgba(255,105,180,0.5);
+        }
+        .gallery-img {
+            width: 100%; height: 280px; object-fit: cover;
+            display: block; transition: transform 0.5s ease;
+        }
+        .gallery-item:hover .gallery-img { transform: scale(1.1); }
+        .gallery-overlay {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 30px 20px 20px; text-align: center;
+        }
+        .gallery-overlay h4 {
+            font-family: 'Great Vibes', cursive; font-size: 1.6rem; margin-bottom: 5px;
+        }
+        .gallery-overlay p { font-size: 0.85rem; color: rgba(255,255,255,0.7); }
+        .gallery-overlay .click-icon {
+            position: absolute; top: 15px; right: 15px;
+            background: rgba(255,255,255,0.2); border-radius: 50%;
+            width: 40px; height: 40px; display: flex; align-items: center;
+            justify-content: center; font-size: 1.2rem; backdrop-filter: blur(5px);
+            opacity: 0; transform: scale(0.5); transition: all 0.3s ease;
+        }
+        .gallery-item:hover .gallery-overlay .click-icon { opacity: 1; transform: scale(1); }
+
+        /* CSS Art for gallery fallback */
+        .css-art {
+            width: 100%; height: 280px; display: flex; align-items: center;
+            justify-content: center; position: relative; overflow: hidden;
+        }
+        .art-heart-shape {
+            width: 100px; height: 100px; background: linear-gradient(135deg, #ff6b9d, #c44569);
+            transform: rotate(-45deg); position: relative; animation: artPulse 2s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(255,107,157,0.5);
+        }
+        .art-heart-shape::before, .art-heart-shape::after {
+            content: ''; width: 100px; height: 100px; border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            position: absolute;
+        }
+        .art-heart-shape::before { top: -50px; left: 0; }
+        .art-heart-shape::after { top: 0; left: 50px; }
+        @keyframes artPulse { 0%, 100% { transform: rotate(-45deg) scale(1); } 50% { transform: rotate(-45deg) scale(1.1); } }
+
+        .art-rose {
+            width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(180deg, #1a0a2e 0%, #4a1942 100%);
+        }
+        .rose-center {
+            width: 60px; height: 60px; border-radius: 50%;
+            background: radial-gradient(circle, #ff1744 0%, #c2185b 70%);
+            box-shadow: 0 0 40px rgba(255,23,68,0.5);
+            position: relative; animation: roseSpin 8s linear infinite;
+        }
+        .rose-petal {
+            position: absolute; width: 50px; height: 50px; border-radius: 50%;
+            background: linear-gradient(135deg, #e91e63, #ad1457);
+            opacity: 0.8;
+        }
+        @keyframes roseSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .art-stars {
+            width: 100%; height: 100%; background: linear-gradient(180deg, #0d0221 0%, #240b36 100%);
+            position: relative; overflow: hidden;
+        }
+        .art-star {
+            position: absolute; width: 4px; height: 4px; background: white;
+            border-radius: 50%; box-shadow: 0 0 10px white;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+        .art-couple {
+            width: 100%; height: 100%; background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            display: flex; align-items: center; justify-content: center; font-size: 5rem;
+        }
+
+        .art-moon {
+            width: 100%; height: 100%; background: linear-gradient(180deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            display: flex; align-items: center; justify-content: center; position: relative;
+        }
+        .moon-shape {
+            width: 100px; height: 100px; border-radius: 50%;
+            background: linear-gradient(135deg, #fff9c4, #ffecb3);
+            box-shadow: 0 0 60px rgba(255,236,179,0.6), 0 0 100px rgba(255,236,179,0.3);
+            animation: moonGlow 3s ease-in-out infinite alternate;
+        }
+        @keyframes moonGlow { from { box-shadow: 0 0 60px rgba(255,236,179,0.6); } to { box-shadow: 0 0 80px rgba(255,236,179,0.9); } }
+
+        .art-sunset {
+            width: 100%; height: 100%; background: linear-gradient(180deg, #ff512f 0%, #dd2476 50%, #8e2de2 100%);
+            display: flex; align-items: center; justify-content: center; font-size: 4rem;
+        }
+
+        /* ===== POPUP MODAL ===== */
+        .popup-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.75); backdrop-filter: blur(10px);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000; opacity: 0; visibility: hidden;
+            transition: all 0.4s ease; padding: 20px;
+        }
+        .popup-overlay.active { opacity: 1; visibility: visible; }
+
+        .popup-box {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 50%, #f8b500 100%);
+            border-radius: 30px; padding: 45px 35px; max-width: 500px; width: 100%;
+            text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.4), 0 0 50px rgba(255,107,157,0.4);
+            transform: scale(0.5) translateY(50px);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative; border: 2px solid rgba(255,255,255,0.3);
+            max-height: 85vh; overflow-y: auto;
+        }
+        .popup-overlay.active .popup-box { transform: scale(1) translateY(0); }
+
+        .popup-emoji { font-size: 3.5rem; margin-bottom: 15px; animation: bounce 1s ease infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        .popup-text {
+            font-family: 'Great Vibes', cursive; font-size: 2.2rem;
+            color: white; text-shadow: 0 0 20px rgba(255,255,255,0.5);
+            line-height: 1.4; margin-bottom: 15px;
+        }
+        .popup-detail {
+            font-family: 'Hind Siliguri', 'Poppins', sans-serif; font-size: 1rem;
+            color: rgba(255,255,255,0.95); line-height: 1.8; margin-bottom: 20px;
+        }
+        .popup-hearts { font-size: 1.8rem; margin-bottom: 20px; animation: heartbeat 1s ease-in-out infinite; }
+        .popup-close {
+            background: rgba(255,255,255,0.25); border: 2px solid rgba(255,255,255,0.5);
+            color: white; padding: 12px 35px; border-radius: 30px;
+            font-family: 'Poppins', sans-serif; font-size: 1rem; cursor: pointer;
+            transition: all 0.3s ease; backdrop-filter: blur(5px);
+        }
+        .popup-close:hover { background: rgba(255,255,255,0.4); transform: scale(1.05); }
+        .popup-close:active { transform: scale(0.95); }
+
+        /* Gallery Detail Popup */
+        .gallery-popup-box {
+            background: linear-gradient(135deg, #1a0a2e 0%, #4a1942 50%, #893168 100%);
+            border-radius: 25px; padding: 0; max-width: 550px; width: 100%;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 50px rgba(255,107,157,0.3);
+            transform: scale(0.7) translateY(30px);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative; border: 2px solid rgba(255,255,255,0.2);
+            overflow: hidden; max-height: 85vh; overflow-y: auto;
+        }
+        .popup-overlay.active .gallery-popup-box { transform: scale(1) translateY(0); }
+        .gallery-popup-img {
+            width: 100%; height: 250px; object-fit: cover; display: block;
+        }
+        .gallery-popup-content { padding: 30px; text-align: center; }
+        .gallery-popup-content h3 {
+            font-family: 'Great Vibes', cursive; font-size: 2.2rem;
+            margin-bottom: 15px; color: #ffb3d1;
+        }
+        .gallery-popup-content p {
+            font-family: 'Hind Siliguri', 'Poppins', sans-serif;
+            font-size: 1.05rem; line-height: 1.9; color: rgba(255,255,255,0.9);
+        }
+        .gallery-popup-content .popup-hearts { margin: 20px 0; }
+
+        /* Floating emojis */
+        .floating-emoji {
+            position: fixed; font-size: 24px; pointer-events: none;
+            z-index: 5; animation: floatEmoji 10s ease-in-out infinite;
+        }
+        @keyframes floatEmoji {
+            0%, 100% { transform: translate(0,0) rotate(0deg); }
+            25% { transform: translate(20px,-30px) rotate(10deg); }
+            50% { transform: translate(-10px,-50px) rotate(-5deg); }
+            75% { transform: translate(15px,-20px) rotate(5deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { gap: 4px; }
+            .nav-link { padding: 6px 12px; font-size: 0.8rem; }
+            .love-title { font-size: 2.5rem; }
+            .message-card { padding: 25px; }
+            .animated-text { font-size: 1.1rem; line-height: 2; }
+            .page-header h2 { font-size: 2.2rem; }
+            .messages-grid { grid-template-columns: 1fr; padding: 15px; }
+            .gallery-grid { grid-template-columns: 1fr; padding: 15px; }
+            .popup-text { font-size: 1.8rem; }
+            .gallery-popup-content h3 { font-size: 1.8rem; }
+        }
+
+        .hidden { display: none !important; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,105,180,0.5); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,105,180,0.7); }
     </style>
+<base target="_blank">
 </head>
 <body>
     <!-- Floating Hearts Background -->
     <div class="hearts-container" id="heartsContainer"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-inner">
+            <div class="nav-logo">💕 Love World</div>
+            <div class="nav-links">
+                <button class="nav-link active" onclick="showPage('home')">🏠 Home</button>
+                <button class="nav-link" onclick="showPage('messages')">💌 Messages</button>
+                <button class="nav-link" onclick="showPage('gallery')">🖼️ Gallery</button>
+            </div>
+        </div>
+    </nav>
 
     <!-- Language Toggle -->
     <div class="lang-toggle">
@@ -444,158 +466,242 @@
     <div class="floating-emoji" style="top: 60%; left: 5%; animation-delay: 3s;">✨</div>
     <div class="floating-emoji" style="top: 40%; right: 5%; animation-delay: 5s;">💫</div>
 
-    <!-- Popup Modal -->
-    <div class="popup-overlay" id="lovePopup">
+    <!-- ===== HOME PAGE ===== -->
+    <section id="page-home" class="page-section active">
+        <div class="home-container">
+            <h1 class="love-title">For You</h1>
+            <p class="subtitle">A message from my heart to yours</p>
+
+            <div class="message-card">
+                <div class="corner-heart tl">💗</div>
+                <div class="corner-heart tr">💗</div>
+                <div class="corner-heart bl">💗</div>
+                <div class="corner-heart br">💗</div>
+
+                <!-- Bangla Version -->
+                <div id="bn-text-home" class="animated-text">
+                    <span class="heart-icon">💌</span>
+                    <p>
+                        <span class="word">শোনো,</span>
+                        <span class="word">আমি</span>
+                        <span class="word">জানি</span>
+                        <span class="word">তুমি</span>
+                        <span class="word">অভিমান</span>
+                        <span class="word">করেছ,</span>
+                        <span class="word">আর</span>
+                        <span class="word">হয়তো</span>
+                        <span class="word">আমার</span>
+                        <span class="word">কোনো</span>
+                        <span class="word">কথায়</span>
+                        <span class="word">বা</span>
+                        <span class="word">আচরণে</span>
+                        <span class="word">তুমি</span>
+                        <span class="word">কষ্ট</span>
+                        <span class="word">পেয়েছ।</span>
+                        <br><br>
+                        <span class="word">সত্যি</span>
+                        <span class="word">বলতে,</span>
+                        <span class="word">তোমার</span>
+                        <span class="word">কষ্টটা</span>
+                        <span class="word">আমার</span>
+                        <span class="word">ভালো</span>
+                        <span class="word">লাগে</span>
+                        <span class="word">না।</span>
+                        <br><br>
+                        <span class="word">আমি</span>
+                        <span class="word">যদি</span>
+                        <span class="word">ভুল</span>
+                        <span class="word">করে</span>
+                        <span class="word">থাকি,</span>
+                        <span class="word">আমি</span>
+                        <span class="word">আন্তরিকভাবে</span>
+                        <span class="word">সরি।</span>
+                        <br><br>
+                        <span class="word">তুমি</span>
+                        <span class="word">আমার</span>
+                        <span class="word">কাছে</span>
+                        <span class="word">গুরুত্বপূর্ণ,</span>
+                        <span class="word">তাই</span>
+                        <span class="word">চাই</span>
+                        <span class="word">না</span>
+                        <span class="word">আমাদের</span>
+                        <span class="word">মধ্যে</span>
+                        <span class="word">কোনো</span>
+                        <span class="word">দূরত্ব</span>
+                        <span class="word">থাকুক।</span>
+                    </p>
+                    <span class="heart-icon">❤️</span>
+                </div>
+
+                <!-- English Version -->
+                <div id="en-text-home" class="animated-text hidden">
+                    <span class="heart-icon">💌</span>
+                    <p>
+                        <span class="word">Listen,</span>
+                        <span class="word">I</span>
+                        <span class="word">know</span>
+                        <span class="word">you</span>
+                        <span class="word">are</span>
+                        <span class="word">upset,</span>
+                        <span class="word">and</span>
+                        <span class="word">perhaps</span>
+                        <span class="word">you</span>
+                        <span class="word">have</span>
+                        <span class="word">been</span>
+                        <span class="word">hurt</span>
+                        <span class="word">by</span>
+                        <span class="word">something</span>
+                        <span class="word">I</span>
+                        <span class="word">said</span>
+                        <span class="word">or</span>
+                        <span class="word">did.</span>
+                        <br><br>
+                        <span class="word">Honestly,</span>
+                        <span class="word">I</span>
+                        <span class="word">don't</span>
+                        <span class="word">like</span>
+                        <span class="word">seeing</span>
+                        <span class="word">you</span>
+                        <span class="word">in</span>
+                        <span class="word">pain.</span>
+                        <br><br>
+                        <span class="word">If</span>
+                        <span class="word">I</span>
+                        <span class="word">have</span>
+                        <span class="word">made</span>
+                        <span class="word">a</span>
+                        <span class="word">mistake,</span>
+                        <span class="word">I</span>
+                        <span class="word">am</span>
+                        <span class="word">sincerely</span>
+                        <span class="word">sorry.</span>
+                        <br><br>
+                        <span class="word">You</span>
+                        <span class="word">are</span>
+                        <span class="word">important</span>
+                        <span class="word">to</span>
+                        <span class="word">me,</span>
+                        <span class="word">so</span>
+                        <span class="word">I</span>
+                        <span class="word">don't</span>
+                        <span class="word">want</span>
+                        <span class="word">any</span>
+                        <span class="word">distance</span>
+                        <span class="word">between</span>
+                        <span class="word">us.</span>
+                    </p>
+                    <span class="heart-icon">❤️</span>
+                </div>
+
+                <div style="text-align: center; position: relative; z-index: 10;">
+                    <div class="clickable-love" onclick="openPopup('janu')" title="Click me!">💝</div>
+                    <div class="click-hint">✨ Click the heart ✨</div>
+                </div>
+                <div class="signature">With Love</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MESSAGES PAGE ===== -->
+    <section id="page-messages" class="page-section">
+        <div class="page-header">
+            <h2>Romantic Messages</h2>
+            <p>Beautiful words for your special someone 💕</p>
+        </div>
+        <div class="messages-grid" id="messagesGrid"></div>
+    </section>
+
+    <!-- ===== GALLERY PAGE ===== -->
+    <section id="page-gallery" class="page-section">
+        <div class="page-header">
+            <h2>Romantic Gallery</h2>
+            <p>Click any image to reveal a love message 🖼️💌</p>
+        </div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+
+    <!-- ===== POPUPS ===== -->
+    <!-- Janu Popup -->
+    <div class="popup-overlay" id="popup-janu">
         <div class="popup-box">
             <div class="popup-emoji">🥺💕</div>
             <div class="popup-text">Jaaaaaaaanu<br>I'm soooo sorry</div>
             <div class="popup-hearts">💖💗💖💗💖</div>
-            <button class="popup-close" onclick="closePopup()">Forgive Me ❤️</button>
+            <button class="popup-close" onclick="closePopup('janu')">Forgive Me ❤️</button>
         </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="main-container">
-        <h1 class="love-title">For You</h1>
-        <p class="subtitle">A message from my heart to yours</p>
-
-        <div class="message-card">
-            <div class="corner-heart tl">💗</div>
-            <div class="corner-heart tr">💗</div>
-            <div class="corner-heart bl">💗</div>
-            <div class="corner-heart br">💗</div>
-
-            <!-- Bangla Version -->
-            <div id="bn-text" class="animated-text">
-                <span class="heart-icon">💌</span>
-                <p>
-                    <span class="word">শোনো,</span>
-                    <span class="word">আমি</span>
-                    <span class="word">জানি</span>
-                    <span class="word">তুমি</span>
-                    <span class="word">অভিমান</span>
-                    <span class="word">করেছ,</span>
-                    <span class="word">আর</span>
-                    <span class="word">হয়তো</span>
-                    <span class="word">আমার</span>
-                    <span class="word">কোনো</span>
-                    <span class="word">কথায়</span>
-                    <span class="word">বা</span>
-                    <span class="word">আচরণে</span>
-                    <span class="word">তুমি</span>
-                    <span class="word">কষ্ট</span>
-                    <span class="word">পেয়েছ।</span>
-                    <br><br>
-                    <span class="word">সত্যি</span>
-                    <span class="word">বলতে,</span>
-                    <span class="word">তোমার</span>
-                    <span class="word">কষ্টটা</span>
-                    <span class="word">আমার</span>
-                    <span class="word">ভালো</span>
-                    <span class="word">লাগে</span>
-                    <span class="word">না।</span>
-                    <br><br>
-                    <span class="word">আমি</span>
-                    <span class="word">যদি</span>
-                    <span class="word">ভুল</span>
-                    <span class="word">করে</span>
-                    <span class="word">থাকি,</span>
-                    <span class="word">আমি</span>
-                    <span class="word">আন্তরিকভাবে</span>
-                    <span class="word">সরি।</span>
-                    <br><br>
-                    <span class="word">তুমি</span>
-                    <span class="word">আমার</span>
-                    <span class="word">কাছে</span>
-                    <span class="word">গুরুত্বপূর্ণ,</span>
-                    <span class="word">তাই</span>
-                    <span class="word">চাই</span>
-                    <span class="word">না</span>
-                    <span class="word">আমাদের</span>
-                    <span class="word">মধ্যে</span>
-                    <span class="word">কোনো</span>
-                    <span class="word">দূরত্ব</span>
-                    <span class="word">থাকুক।</span>
-                </p>
-                <span class="heart-icon">❤️</span>
+    <!-- Gallery Detail Popup -->
+    <div class="popup-overlay" id="popup-gallery">
+        <div class="gallery-popup-box">
+            <div id="galleryPopupArt"></div>
+            <div class="gallery-popup-content">
+                <h3 id="galleryPopupTitle"></h3>
+                <p id="galleryPopupText"></p>
+                <div class="popup-hearts">💖💗💖💗💖</div>
+                <button class="popup-close" onclick="closePopup('gallery')">Close 💕</button>
             </div>
-
-            <!-- English Version -->
-            <div id="en-text" class="animated-text hidden">
-                <span class="heart-icon">💌</span>
-                <p>
-                    <span class="word">Listen,</span>
-                    <span class="word">I</span>
-                    <span class="word">know</span>
-                    <span class="word">you</span>
-                    <span class="word">are</span>
-                    <span class="word">upset,</span>
-                    <span class="word">and</span>
-                    <span class="word">perhaps</span>
-                    <span class="word">you</span>
-                    <span class="word">have</span>
-                    <span class="word">been</span>
-                    <span class="word">hurt</span>
-                    <span class="word">by</span>
-                    <span class="word">something</span>
-                    <span class="word">I</span>
-                    <span class="word">said</span>
-                    <span class="word">or</span>
-                    <span class="word">did.</span>
-                    <br><br>
-                    <span class="word">Honestly,</span>
-                    <span class="word">I</span>
-                    <span class="word">don't</span>
-                    <span class="word">like</span>
-                    <span class="word">seeing</span>
-                    <span class="word">you</span>
-                    <span class="word">in</span>
-                    <span class="word">pain.</span>
-                    <br><br>
-                    <span class="word">If</span>
-                    <span class="word">I</span>
-                    <span class="word">have</span>
-                    <span class="word">made</span>
-                    <span class="word">a</span>
-                    <span class="word">mistake,</span>
-                    <span class="word">I</span>
-                    <span class="word">am</span>
-                    <span class="word">sincerely</span>
-                    <span class="word">sorry.</span>
-                    <br><br>
-                    <span class="word">You</span>
-                    <span class="word">are</span>
-                    <span class="word">important</span>
-                    <span class="word">to</span>
-                    <span class="word">me,</span>
-                    <span class="word">so</span>
-                    <span class="word">I</span>
-                    <span class="word">don't</span>
-                    <span class="word">want</span>
-                    <span class="word">any</span>
-                    <span class="word">distance</span>
-                    <span class="word">between</span>
-                    <span class="word">us.</span>
-                </p>
-                <span class="heart-icon">❤️</span>
-            </div>
-
-            <!-- Clickable Love Emoji -->
-            <div style="text-align: center; position: relative; z-index: 10;">
-                <div class="clickable-love" onclick="openPopup()" title="Click me!">💝</div>
-                <div class="click-hint">✨ Click the heart ✨</div>
-            </div>
-
-            <div class="signature">With Love</div>
         </div>
     </div>
 
     <script>
-        // Generate floating hearts
+        // ================= DATA =================
+        const messagesData = {
+            bn: [
+                { emoji: "💖", text: "তুমি আমার জীবনের সবচেয়ে সুন্দর উপহার। প্রতিদিন তোমাকে ভালোবাসি আরও বেশি।", tag: "ভালোবাসা" },
+                { emoji: "🌙", text: "চাঁদের আলোয় যত তারা জ্বলে, তোমার চেয়ে সুন্দর কিছুই নেই এই পৃথিবীতে।", tag: "রোমান্টিক" },
+                { emoji: "☕", text: "সকালের প্রথম চায়ের মতো তুমি — গরম, মিষ্টি, আর আমার দিন শুরুর সেরা অংশ।", tag: "সুপ্রভাত" },
+                { emoji: "🌹", text: "হাজার গোলাপ ফুটুক, কিন্তু তোমার মতো সুন্দর কেউ হবে না। তুমি আমার একমাত্র গোলাপ।", tag: "প্রশংসা" },
+                { emoji: "💫", text: "তোমার চোখে যে জাদু আছে, তাতে আমি হারিয়ে যাই বারবার। তুমি আমার স্বপ্নের রানী।", tag: "রোমান্টিক" },
+                { emoji: "🌧️", text: "বৃষ্টির দিনে তোমার হাত ধরে হাঁটার স্বপ্ন দেখি। তুমি ছাড়া বৃষ্টিও ফাঁকা লাগে।", tag: "স্বপ্ন" },
+                { emoji: "🔥", text: "তুমি আমার হৃদয়ের আগুন। তোমার ছোঁয়ায় আমার সব ঠাণ্ডা হৃদয় গরম হয়ে ওঠে।", tag: "আবেগ" },
+                { emoji: "🦋", text: "তোমার কথা ভাবলেই পেটের মধ্যে প্রজাপতি উড়তে শুরু করে। এটাই কি ভালোবাসা?", tag: "মিষ্টি" },
+                { emoji: "🌅", text: "সূর্যোদয়ের আলো তোমার মুখে পড়লে পৃথিবী থেমে যায়। তুমি আমার সূর্য।", tag: "সুপ্রভাত" },
+                { emoji: "💍", text: "তোমার সাথে প্রতিটা মুহূর্ত আমার জীবনের সেরা মুহূর্ত। চিরকাল তোমার হতে চাই।", tag: "চিরকাল" },
+                { emoji: "🎵", text: "তোমার হাসি আমার প্রিয় সঙ্গীত। তোমার কণ্ঠ আমার প্রিয় গান। তুমি আমার সবকিছু।", tag: "সঙ্গীত" },
+                { emoji: "✨", text: "তুমি ছাড়া আমার জীবন অন্ধকার। তুমি আমার আলো, তুমি আমার সব।", tag: "আলো" },
+            ],
+            en: [
+                { emoji: "💖", text: "You are the most beautiful gift in my life. I love you more with each passing day.", tag: "Love" },
+                { emoji: "🌙", text: "As many stars shine in the moonlight, nothing is more beautiful than you in this world.", tag: "Romantic" },
+                { emoji: "☕", text: "You are like my first morning tea — warm, sweet, and the best part of starting my day.", tag: "Good Morning" },
+                { emoji: "🌹", text: "Let a thousand roses bloom, but no one will be as beautiful as you. You are my only rose.", tag: "Praise" },
+                { emoji: "💫", text: "The magic in your eyes makes me lose myself again and again. You are the queen of my dreams.", tag: "Romantic" },
+                { emoji: "🌧️", text: "I dream of walking holding your hand on a rainy day. Even rain feels empty without you.", tag: "Dream" },
+                { emoji: "🔥", text: "You are the fire of my heart. Your touch warms my cold heart completely.", tag: "Passion" },
+                { emoji: "🦋", text: "Butterflies start flying in my stomach when I think of you. Is this what love is?", tag: "Sweet" },
+                { emoji: "🌅", text: "When sunrise light falls on your face, the world stops. You are my sun.", tag: "Good Morning" },
+                { emoji: "💍", text: "Every moment with you is the best moment of my life. I want to be yours forever.", tag: "Forever" },
+                { emoji: "🎵", text: "Your smile is my favorite music. Your voice is my favorite song. You are my everything.", tag: "Music" },
+                { emoji: "✨", text: "My life is dark without you. You are my light, you are my everything.", tag: "Light" },
+            ]
+        };
+
+        const galleryData = {
+            bn: [
+                { type: "heart", title: "অনন্ত ভালোবাসা", text: "তোমার হৃদয়ে যে জায়গা পেয়েছি, সেটাই আমার সবচেয়ে বড় সম্পদ। চিরকাল তোমার হয়ে থাকতে চাই। 💕", emoji: "💗" },
+                { type: "rose", title: "গোলাপের মতো তুমি", text: "গোলাপ ফোটার আগে কাঁটা সহ্য করে। তোমার মতো সুন্দর হতে হলে কিছু কষ্ট সহ্য করতেই হয়। তুমি আমার গোলাপ। 🌹", emoji: "🌹" },
+                { type: "stars", title: "তারার নিচে তুমি", text: "রাতের আকাশের হাজার তারার মধ্যে তুমি আমার সবচেয়ে উজ্জ্বল তারা। তোমার আলোয় আমার জীবন রঙিন। ✨", emoji: "⭐" },
+                { type: "couple", title: "দুজন একসাথে", text: "তোমার হাত ধরলে পৃথিবীর সব সমস্যা ছোট হয়ে যায়। তুমি আমার শক্তি, তুমি আমার ভরসা। 🤝💕", emoji: "💑" },
+                { type: "moon", title: "চাঁদের কথা", text: "চাঁদ রাতে উঠে তোমাকে দেখতে। কারণ চাঁদও জানে এই পৃথিবীর সবচেয়ে সুন্দর তুমি। 🌙", emoji: "🌙" },
+                { type: "sunset", title: "সূর্যাস্তের প্রতিজ্ঞা", text: "প্রতি সূর্যাস্তে প্রতিজ্ঞা করি — কাল সকালেও তোমাকে আরও বেশি ভালোবাসবো। এটাই আমার প্রতিদিনের প্রতিজ্ঞা। 🌅", emoji: "🌇" },
+            ],
+            en: [
+                { type: "heart", title: "Infinite Love", text: "The place I have found in your heart is my greatest treasure. I want to be yours forever. 💕", emoji: "💗" },
+                { type: "rose", title: "Rose Like You", text: "A rose endures thorns before it blooms. To be as beautiful as you, one must endure some pain. You are my rose. 🌹", emoji: "🌹" },
+                { type: "stars", title: "You Under the Stars", text: "Among thousands of stars in the night sky, you are my brightest star. Your light colors my life. ✨", emoji: "⭐" },
+                { type: "couple", title: "Together Forever", text: "When I hold your hand, all the world's problems become small. You are my strength, you are my trust. 🤝💕", emoji: "💑" },
+                { type: "moon", title: "Moon's Tale", text: "The moon rises at night to see you. Because even the moon knows you are the most beautiful in this world. 🌙", emoji: "🌙" },
+                { type: "sunset", title: "Sunset Promise", text: "With every sunset, I promise — tomorrow morning I will love you even more. This is my daily promise. 🌅", emoji: "🌇" },
+            ]
+        };
+
+        // ================= FUNCTIONS =================
+        let currentLang = 'bn';
+
         function createHearts() {
             const container = document.getElementById('heartsContainer');
-            const heartSymbols = ['❤️', '💕', '💖', '💗', '💓', '💝', '💘', '💞'];
-
+            const heartSymbols = ['❤️','💕','💖','💗','💓','💝','💘','💞'];
             for (let i = 0; i < 30; i++) {
                 const heart = document.createElement('div');
                 heart.className = 'heart';
@@ -608,7 +714,6 @@
             }
         }
 
-        // Generate sparkles
         function createSparkles() {
             const container = document.getElementById('heartsContainer');
             for (let i = 0; i < 50; i++) {
@@ -622,76 +727,125 @@
             }
         }
 
-        // Popup functions
-        function openPopup() {
-            const popup = document.getElementById('lovePopup');
-            popup.classList.add('active');
-            createConfetti();
+        function showPage(page) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.getElementById('page-' + page).classList.add('active');
+            event.target.classList.add('active');
+            window.scrollTo(0, 0);
         }
 
-        function closePopup() {
-            const popup = document.getElementById('lovePopup');
-            popup.classList.remove('active');
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Home text toggle
+            const bnHome = document.getElementById('bn-text-home');
+            const enHome = document.getElementById('en-text-home');
+            if (lang === 'bn') { bnHome.classList.remove('hidden'); enHome.classList.add('hidden'); }
+            else { bnHome.classList.add('hidden'); enHome.classList.remove('hidden'); }
+
+            renderMessages();
+            renderGallery();
         }
 
-        // Close popup on overlay click
-        document.getElementById('lovePopup').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closePopup();
+        function renderMessages() {
+            const grid = document.getElementById('messagesGrid');
+            const data = messagesData[currentLang];
+            grid.innerHTML = data.map((msg, i) => `
+                <div class="msg-card" style="animation-delay: ${i * 0.1}s">
+                    <span class="msg-emoji">${msg.emoji}</span>
+                    <p class="msg-text">${msg.text}</p>
+                    <span class="msg-tag">${msg.tag}</span>
+                </div>
+            `).join('');
+        }
+
+        function getArtHTML(type) {
+            switch(type) {
+                case 'heart': return `<div class="css-art"><div class="art-heart-shape"></div></div>`;
+                case 'rose':
+                    let roseHTML = `<div class="css-art art-rose"><div class="rose-center">`;
+                    for(let i=0; i<8; i++) {
+                        const angle = i * 45;
+                        roseHTML += `<div class="rose-petal" style="transform: rotate(${angle}deg) translateX(35px);"></div>`;
+                    }
+                    roseHTML += `</div></div>`;
+                    return roseHTML;
+                case 'stars':
+                    let starsHTML = `<div class="css-art art-stars">`;
+                    for(let i=0; i<30; i++) {
+                        starsHTML += `<div class="art-star" style="left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*2}s;"></div>`;
+                    }
+                    starsHTML += `</div>`;
+                    return starsHTML;
+                case 'couple': return `<div class="css-art art-couple">💑</div>`;
+                case 'moon': return `<div class="css-art art-moon"><div class="moon-shape"></div></div>`;
+                case 'sunset': return `<div class="css-art art-sunset">🌅</div>`;
+                default: return `<div class="css-art art-heart-shape"></div>`;
             }
+        }
+
+        function renderGallery() {
+            const grid = document.getElementById('galleryGrid');
+            const data = galleryData[currentLang];
+            grid.innerHTML = data.map((item, i) => `
+                <div class="gallery-item" onclick="openGalleryPopup(${i})" style="animation: fadeInUp 0.6s ease ${i*0.15}s both;">
+                    ${getArtHTML(item.type)}
+                    <div class="gallery-overlay">
+                        <div class="click-icon">🔍</div>
+                        <h4>${item.title}</h4>
+                        <p>Click to read the message</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openPopup(type) {
+            document.getElementById('popup-' + type).classList.add('active');
+        }
+
+        function closePopup(type) {
+            document.getElementById('popup-' + type).classList.remove('active');
+        }
+
+        function openGalleryPopup(index) {
+            const item = galleryData[currentLang][index];
+            document.getElementById('galleryPopupArt').innerHTML = getArtHTML(item.type);
+            document.getElementById('galleryPopupTitle').textContent = item.emoji + ' ' + item.title;
+            document.getElementById('galleryPopupText').textContent = item.text;
+            document.getElementById('popup-gallery').classList.add('active');
+        }
+
+        // Close popups on overlay click
+        document.querySelectorAll('.popup-overlay').forEach(overlay => {
+            overlay.addEventListener('click', function(e) {
+                if (e.target === this) this.classList.remove('active');
+            });
         });
 
-        // Confetti effect
-        function createConfetti() {
-            const popupBox = document.querySelector('.popup-box');
-            const colors = ['#ff6b9d', '#f8b500', '#e056fd', '#00d2ff', '#ff4757', '#2ed573'];
-
-            for (let i = 0; i < 30; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti-piece';
-                confetti.style.left = Math.random() * 100 + '%';
-                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.animationDelay = Math.random() * 1 + 's';
-                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-                confetti.style.width = (Math.random() * 8 + 5) + 'px';
-                confetti.style.height = (Math.random() * 8 + 5) + 'px';
-                popupBox.appendChild(confetti);
-
-                setTimeout(() => confetti.remove(), 4000);
+        // Add fadeInUp animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from { opacity: 0; transform: translateY(30px); }
+                to { opacity: 1; transform: translateY(0); }
             }
-        }
-
-        // Language toggle
-        function setLang(lang) {
-            const bnText = document.getElementById('bn-text');
-            const enText = document.getElementById('en-text');
-            const buttons = document.querySelectorAll('.lang-btn');
-
-            buttons.forEach(btn => btn.classList.remove('active'));
-
-            if (lang === 'bn') {
-                bnText.classList.remove('hidden');
-                enText.classList.add('hidden');
-                buttons[0].classList.add('active');
-                document.title = 'ভালোবাসার বার্তা ❤️';
-            } else {
-                bnText.classList.add('hidden');
-                enText.classList.remove('hidden');
-                buttons[1].classList.add('active');
-                document.title = 'Love Message ❤️';
-            }
-        }
+        `;
+        document.head.appendChild(style);
 
         // Initialize
         createHearts();
         createSparkles();
+        renderMessages();
+        renderGallery();
 
-        // Add mouse move effect
+        // Mouse parallax
         document.addEventListener('mousemove', (e) => {
             const x = e.clientX / window.innerWidth;
             const y = e.clientY / window.innerHeight;
-            document.body.style.backgroundPosition = `${x * 50}% ${y * 50}%`;
+            document.body.style.backgroundPosition = `${x*50}% ${y*50}%`;
         });
     </script>
 </body>

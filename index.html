@@ -219,6 +219,156 @@
             40% { transform: scale(1); }
         }
 
+        /* Clickable Love Emoji Button */
+        .clickable-love {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            cursor: pointer;
+            margin: 15px auto;
+            animation: heartbeat 1.2s ease-in-out infinite, loveGlow 2s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 15px rgba(255, 20, 147, 0.6));
+            transition: transform 0.2s ease;
+            user-select: none;
+            position: relative;
+            z-index: 10;
+        }
+
+        .clickable-love:hover {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 25px rgba(255, 20, 147, 0.9));
+        }
+
+        .clickable-love:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes loveGlow {
+            from { filter: drop-shadow(0 0 10px rgba(255, 20, 147, 0.5)); }
+            to { filter: drop-shadow(0 0 30px rgba(255, 20, 147, 1)); }
+        }
+
+        .click-hint {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 5px;
+            animation: fadeInOut 2s ease-in-out infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* Popup Modal */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-box {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 50%, #f8b500 100%);
+            border-radius: 30px;
+            padding: 50px 40px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 50px rgba(255, 107, 157, 0.4);
+            transform: scale(0.5) translateY(50px);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .popup-overlay.active .popup-box {
+            transform: scale(1) translateY(0);
+        }
+
+        .popup-emoji {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .popup-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: white;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            line-height: 1.4;
+            margin-bottom: 25px;
+        }
+
+        .popup-hearts {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            animation: heartbeat 1s ease-in-out infinite;
+        }
+
+        .popup-close {
+            background: rgba(255, 255, 255, 0.25);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: white;
+            padding: 12px 35px;
+            border-radius: 30px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .popup-close:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+
+        .popup-close:active {
+            transform: scale(0.95);
+        }
+
+        /* Confetti for popup */
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ffd700;
+            top: -10px;
+            opacity: 0;
+        }
+
+        .popup-overlay.active .confetti-piece {
+            animation: confettiFall 3s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+            100% { opacity: 0; transform: translateY(300px) rotate(720deg); }
+        }
+
         /* Signature */
         .signature {
             text-align: center;
@@ -249,6 +399,9 @@
             .love-title { font-size: 2.5rem; }
             .message-card { padding: 25px; }
             .animated-text { font-size: 1.1rem; line-height: 2; }
+            .popup-text { font-size: 2rem; }
+            .popup-box { padding: 35px 25px; }
+            .clickable-love { font-size: 3rem; }
         }
 
         /* Hidden class for language toggle */
@@ -290,6 +443,16 @@
     <div class="floating-emoji" style="bottom: 30%; right: 10%; animation-delay: 6s;">🌸</div>
     <div class="floating-emoji" style="top: 60%; left: 5%; animation-delay: 3s;">✨</div>
     <div class="floating-emoji" style="top: 40%; right: 5%; animation-delay: 5s;">💫</div>
+
+    <!-- Popup Modal -->
+    <div class="popup-overlay" id="lovePopup">
+        <div class="popup-box">
+            <div class="popup-emoji">🥺💕</div>
+            <div class="popup-text">Jaaaaaaaanu<br>I'm soooo sorry</div>
+            <div class="popup-hearts">💖💗💖💗💖</div>
+            <button class="popup-close" onclick="closePopup()">Forgive Me ❤️</button>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <div class="main-container">
@@ -417,6 +580,12 @@
                 <span class="heart-icon">❤️</span>
             </div>
 
+            <!-- Clickable Love Emoji -->
+            <div style="text-align: center; position: relative; z-index: 10;">
+                <div class="clickable-love" onclick="openPopup()" title="Click me!">💝</div>
+                <div class="click-hint">✨ Click the heart ✨</div>
+            </div>
+
             <div class="signature">With Love</div>
         </div>
     </div>
@@ -450,6 +619,46 @@
                 sparkle.style.animationDelay = Math.random() * 3 + 's';
                 sparkle.style.animationDuration = (Math.random() * 2 + 2) + 's';
                 container.appendChild(sparkle);
+            }
+        }
+
+        // Popup functions
+        function openPopup() {
+            const popup = document.getElementById('lovePopup');
+            popup.classList.add('active');
+            createConfetti();
+        }
+
+        function closePopup() {
+            const popup = document.getElementById('lovePopup');
+            popup.classList.remove('active');
+        }
+
+        // Close popup on overlay click
+        document.getElementById('lovePopup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePopup();
+            }
+        });
+
+        // Confetti effect
+        function createConfetti() {
+            const popupBox = document.querySelector('.popup-box');
+            const colors = ['#ff6b9d', '#f8b500', '#e056fd', '#00d2ff', '#ff4757', '#2ed573'];
+
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti-piece';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 1 + 's';
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                confetti.style.width = (Math.random() * 8 + 5) + 'px';
+                confetti.style.height = (Math.random() * 8 + 5) + 'px';
+                popupBox.appendChild(confetti);
+
+                setTimeout(() => confetti.remove(), 4000);
             }
         }
 

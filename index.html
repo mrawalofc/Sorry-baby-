@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Message ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;600;700&family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a0a2e 0%, #4a1942 25%, #893168 50%, #c44569 75%, #f8b500 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow-x: hidden;
+            font-family: 'Hind Siliguri', 'Poppins', sans-serif;
+            position: relative;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Hearts Background */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 20px;
+            animation: floatUp linear infinite;
+            bottom: -50px;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* Sparkle particles */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkle 3s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Main Container */
+        .main-container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Language Toggle */
+        .lang-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 5px;
+            display: flex;
+            gap: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .lang-btn {
+            padding: 8px 20px;
+            border: none;
+            background: transparent;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn.active {
+            background: rgba(255, 255, 255, 0.3);
+            font-weight: 600;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Title */
+        .love-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.8), 0 0 40px rgba(255, 105, 180, 0.5);
+            margin-bottom: 10px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255, 105, 180, 0.8), 0 0 40px rgba(255, 105, 180, 0.5); }
+            to { text-shadow: 0 0 30px rgba(255, 105, 180, 1), 0 0 60px rgba(255, 105, 180, 0.8), 0 0 80px rgba(255, 20, 147, 0.6); }
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* Message Card */
+        .message-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 700px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Multi-color Animated Text */
+        .animated-text {
+            font-size: 1.4rem;
+            line-height: 2.2;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .animated-text .word {
+            display: inline-block;
+            animation: colorWave 3s ease-in-out infinite;
+            font-weight: 600;
+        }
+
+        @keyframes colorWave {
+            0%, 100% { color: #ff6b9d; text-shadow: 0 0 10px rgba(255, 107, 157, 0.5); }
+            20% { color: #c44569; text-shadow: 0 0 10px rgba(196, 69, 105, 0.5); }
+            40% { color: #f8b500; text-shadow: 0 0 10px rgba(248, 181, 0, 0.5); }
+            60% { color: #ff6b9d; text-shadow: 0 0 10px rgba(255, 107, 157, 0.5); }
+            80% { color: #e056fd; text-shadow: 0 0 10px rgba(224, 86, 253, 0.5); }
+        }
+
+        .animated-text .word:nth-child(2n) { animation-delay: 0.1s; }
+        .animated-text .word:nth-child(3n) { animation-delay: 0.2s; }
+        .animated-text .word:nth-child(4n) { animation-delay: 0.3s; }
+        .animated-text .word:nth-child(5n) { animation-delay: 0.4s; }
+
+        /* Pulsing Heart */
+        .heart-icon {
+            font-size: 3rem;
+            display: block;
+            text-align: center;
+            margin: 20px 0;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            10% { transform: scale(1.1); }
+            20% { transform: scale(1); }
+            30% { transform: scale(1.1); }
+            40% { transform: scale(1); }
+        }
+
+        /* Signature */
+        .signature {
+            text-align: center;
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+        }
+
+        /* Floating emojis */
+        .floating-emoji {
+            position: fixed;
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 5;
+            animation: floatEmoji 10s ease-in-out infinite;
+        }
+
+        @keyframes floatEmoji {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, -30px) rotate(10deg); }
+            50% { transform: translate(-10px, -50px) rotate(-5deg); }
+            75% { transform: translate(15px, -20px) rotate(5deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .love-title { font-size: 2.5rem; }
+            .message-card { padding: 25px; }
+            .animated-text { font-size: 1.1rem; line-height: 2; }
+        }
+
+        /* Hidden class for language toggle */
+        .hidden { display: none !important; }
+
+        /* Decorative corner hearts */
+        .corner-heart {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.6;
+            animation: cornerPulse 2s ease-in-out infinite;
+        }
+
+        .corner-heart.tl { top: 15px; left: 15px; }
+        .corner-heart.tr { top: 15px; right: 15px; animation-delay: 0.5s; }
+        .corner-heart.bl { bottom: 15px; left: 15px; animation-delay: 1s; }
+        .corner-heart.br { bottom: 15px; right: 15px; animation-delay: 1.5s; }
+
+        @keyframes cornerPulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <!-- Language Toggle -->
+    <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('bn')">বাংলা</button>
+        <button class="lang-btn" onclick="setLang('en')">English</button>
+    </div>
+
+    <!-- Floating Emojis -->
+    <div class="floating-emoji" style="top: 15%; left: 10%;">🌹</div>
+    <div class="floating-emoji" style="top: 25%; right: 15%; animation-delay: 2s;">💕</div>
+    <div class="floating-emoji" style="bottom: 20%; left: 20%; animation-delay: 4s;">💖</div>
+    <div class="floating-emoji" style="bottom: 30%; right: 10%; animation-delay: 6s;">🌸</div>
+    <div class="floating-emoji" style="top: 60%; left: 5%; animation-delay: 3s;">✨</div>
+    <div class="floating-emoji" style="top: 40%; right: 5%; animation-delay: 5s;">💫</div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <h1 class="love-title">For You</h1>
+        <p class="subtitle">A message from my heart to yours</p>
+
+        <div class="message-card">
+            <div class="corner-heart tl">💗</div>
+            <div class="corner-heart tr">💗</div>
+            <div class="corner-heart bl">💗</div>
+            <div class="corner-heart br">💗</div>
+
+            <!-- Bangla Version -->
+            <div id="bn-text" class="animated-text">
+                <span class="heart-icon">💌</span>
+                <p>
+                    <span class="word">শোনো,</span>
+                    <span class="word">আমি</span>
+                    <span class="word">জানি</span>
+                    <span class="word">তুমি</span>
+                    <span class="word">অভিমান</span>
+                    <span class="word">করেছ,</span>
+                    <span class="word">আর</span>
+                    <span class="word">হয়তো</span>
+                    <span class="word">আমার</span>
+                    <span class="word">কোনো</span>
+                    <span class="word">কথায়</span>
+                    <span class="word">বা</span>
+                    <span class="word">আচরণে</span>
+                    <span class="word">তুমি</span>
+                    <span class="word">কষ্ট</span>
+                    <span class="word">পেয়েছ।</span>
+                    <br><br>
+                    <span class="word">সত্যি</span>
+                    <span class="word">বলতে,</span>
+                    <span class="word">তোমার</span>
+                    <span class="word">কষ্টটা</span>
+                    <span class="word">আমার</span>
+                    <span class="word">ভালো</span>
+                    <span class="word">লাগে</span>
+                    <span class="word">না।</span>
+                    <br><br>
+                    <span class="word">আমি</span>
+                    <span class="word">যদি</span>
+                    <span class="word">ভুল</span>
+                    <span class="word">করে</span>
+                    <span class="word">থাকি,</span>
+                    <span class="word">আমি</span>
+                    <span class="word">আন্তরিকভাবে</span>
+                    <span class="word">সরি।</span>
+                    <br><br>
+                    <span class="word">তুমি</span>
+                    <span class="word">আমার</span>
+                    <span class="word">কাছে</span>
+                    <span class="word">গুরুত্বপূর্ণ,</span>
+                    <span class="word">তাই</span>
+                    <span class="word">চাই</span>
+                    <span class="word">না</span>
+                    <span class="word">আমাদের</span>
+                    <span class="word">মধ্যে</span>
+                    <span class="word">কোনো</span>
+                    <span class="word">দূরত্ব</span>
+                    <span class="word">থাকুক।</span>
+                </p>
+                <span class="heart-icon">❤️</span>
+            </div>
+
+            <!-- English Version -->
+            <div id="en-text" class="animated-text hidden">
+                <span class="heart-icon">💌</span>
+                <p>
+                    <span class="word">Listen,</span>
+                    <span class="word">I</span>
+                    <span class="word">know</span>
+                    <span class="word">you</span>
+                    <span class="word">are</span>
+                    <span class="word">upset,</span>
+                    <span class="word">and</span>
+                    <span class="word">perhaps</span>
+                    <span class="word">you</span>
+                    <span class="word">have</span>
+                    <span class="word">been</span>
+                    <span class="word">hurt</span>
+                    <span class="word">by</span>
+                    <span class="word">something</span>
+                    <span class="word">I</span>
+                    <span class="word">said</span>
+                    <span class="word">or</span>
+                    <span class="word">did.</span>
+                    <br><br>
+                    <span class="word">Honestly,</span>
+                    <span class="word">I</span>
+                    <span class="word">don't</span>
+                    <span class="word">like</span>
+                    <span class="word">seeing</span>
+                    <span class="word">you</span>
+                    <span class="word">in</span>
+                    <span class="word">pain.</span>
+                    <br><br>
+                    <span class="word">If</span>
+                    <span class="word">I</span>
+                    <span class="word">have</span>
+                    <span class="word">made</span>
+                    <span class="word">a</span>
+                    <span class="word">mistake,</span>
+                    <span class="word">I</span>
+                    <span class="word">am</span>
+                    <span class="word">sincerely</span>
+                    <span class="word">sorry.</span>
+                    <br><br>
+                    <span class="word">You</span>
+                    <span class="word">are</span>
+                    <span class="word">important</span>
+                    <span class="word">to</span>
+                    <span class="word">me,</span>
+                    <span class="word">so</span>
+                    <span class="word">I</span>
+                    <span class="word">don't</span>
+                    <span class="word">want</span>
+                    <span class="word">any</span>
+                    <span class="word">distance</span>
+                    <span class="word">between</span>
+                    <span class="word">us.</span>
+                </p>
+                <span class="heart-icon">❤️</span>
+            </div>
+
+            <div class="signature">With Love</div>
+        </div>
+    </div>
+
+    <script>
+        // Generate floating hearts
+        function createHearts() {
+            const container = document.getElementById('heartsContainer');
+            const heartSymbols = ['❤️', '💕', '💖', '💗', '💓', '💝', '💘', '💞'];
+
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 10 + 8) + 's';
+                heart.style.animationDelay = Math.random() * 10 + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                container.appendChild(heart);
+            }
+        }
+
+        // Generate sparkles
+        function createSparkles() {
+            const container = document.getElementById('heartsContainer');
+            for (let i = 0; i < 50; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 3 + 's';
+                sparkle.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                container.appendChild(sparkle);
+            }
+        }
+
+        // Language toggle
+        function setLang(lang) {
+            const bnText = document.getElementById('bn-text');
+            const enText = document.getElementById('en-text');
+            const buttons = document.querySelectorAll('.lang-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            if (lang === 'bn') {
+                bnText.classList.remove('hidden');
+                enText.classList.add('hidden');
+                buttons[0].classList.add('active');
+                document.title = 'ভালোবাসার বার্তা ❤️';
+            } else {
+                bnText.classList.add('hidden');
+                enText.classList.remove('hidden');
+                buttons[1].classList.add('active');
+                document.title = 'Love Message ❤️';
+            }
+        }
+
+        // Initialize
+        createHearts();
+        createSparkles();
+
+        // Add mouse move effect
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            document.body.style.backgroundPosition = `${x * 50}% ${y * 50}%`;
+        });
+    </script>
+</body>
+</html>
